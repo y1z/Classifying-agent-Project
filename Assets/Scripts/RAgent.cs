@@ -8,16 +8,21 @@ using Unity.MLAgents.Actuators;
 
 
 
+[RequireComponent(typeof(Rigidbody))]
 public class RAgent : Agent
 {
+    
     Rigidbody rBody;
+    public Transform Objetivo;
+    //funcion de acciones y politicas
+    public float multiplicador = 10.0f;
+    
     // Start is called before the first frame update
     void Start()
     {
         rBody = GetComponent<Rigidbody>();
     }
 
-    public Transform Objetivo;
     public override void OnEpisodeBegin()
     {
         //si te caes este va a ser tu punto de inicio
@@ -43,8 +48,6 @@ public class RAgent : Agent
         sensor.AddObservation(rBody.velocity.x);//1 observacion
         sensor.AddObservation(rBody.velocity.z);//1 observacion
     }
-    //funcion de acciones y politicas
-    public float multiplicador = 10;
     public override void OnActionReceived(ActionBuffers actions)
     {
         base.OnActionReceived(actions);

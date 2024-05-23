@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public enum Fruit
 {
     Apple, // red 
@@ -12,7 +13,7 @@ public enum Fruit
     NON_FRUIT, // WHITE indicate error
 }
 
-public class FruitType : MonoBehaviour
+public sealed class FruitType : MonoBehaviour
 {
     public Fruit fruit;
     [SerializeField] private MeshRenderer meshRenderer;
