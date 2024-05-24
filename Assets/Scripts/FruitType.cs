@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum Fruit
+public enum Fruit : int
 {
     Apple, // red 
     Banana, // yellow
