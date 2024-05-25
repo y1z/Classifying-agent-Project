@@ -19,7 +19,7 @@ public sealed class RClassifyingAgent : Agent
 
     public override void Initialize()
     {
-        dictator._currentFruitDemand = Fruit.Apple;
+        dictator.currentFruitDemand = Fruit.Apple;
         foreach (var VARIABLE in dictator.targets)
         {
             data.Add(VARIABLE.targetData);
@@ -52,7 +52,7 @@ public sealed class RClassifyingAgent : Agent
             sensor.AddObservation((int)data[1].heldFruit);
             sensor.AddObservation((int)data[2].heldFruit);
             sensor.AddObservation((int)data[3].heldFruit);
-            sensor.AddObservation((int)dictator._currentFruitDemand);
+            sensor.AddObservation((int)dictator.currentFruitDemand);
             // 5 in total 
         }
 
@@ -89,7 +89,7 @@ public sealed class RClassifyingAgent : Agent
         }
         else if (this.transform.localPosition.y < 0)
         {
-            SetReward(-2.0f);
+            SetReward(punishmentAmount);
             EndEpisode();
         }
 
@@ -113,6 +113,6 @@ public sealed class RClassifyingAgent : Agent
 
     public bool isCorrectTarget(Target target)
     {
-        return dictator._currentFruitDemand == target.targetData.heldFruit;
+        return dictator.currentFruitDemand == target.targetData.heldFruit;
     }
 }

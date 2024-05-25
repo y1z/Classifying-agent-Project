@@ -10,7 +10,7 @@ using UnityEngine;
  */
 public sealed class Dictator : MonoBehaviour
 {
-    public Fruit _currentFruitDemand = Fruit.Apple;
+    public Fruit currentFruitDemand = Fruit.Apple;
 
     private List<Fruit> possible_fruit_array = new List<Fruit>
         { Fruit.Apple, Fruit.Banana, Fruit.Guava, Fruit.BlueBerry };
@@ -35,7 +35,7 @@ public sealed class Dictator : MonoBehaviour
     {
         possible_fruit_array.Shuffle();
         int last_item_index = possible_fruit_array.Count - 1;
-        _currentFruitDemand = possible_fruit_array[last_item_index];
+        currentFruitDemand = possible_fruit_array[last_item_index];
     }
 
     public void changeTargetsFruit()
@@ -50,7 +50,7 @@ public sealed class Dictator : MonoBehaviour
 
     public bool isSameFruit(Fruit fruit)
     {
-        return _currentFruitDemand == fruit;
+        return currentFruitDemand == fruit;
     }
 
     public bool receiveFruit(Fruit fruit)
