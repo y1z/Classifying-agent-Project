@@ -7,16 +7,16 @@ using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 
 
-
 [RequireComponent(typeof(Rigidbody))]
 public class RAgent : Agent
 {
-    
     Rigidbody rBody;
+
     public Transform Objetivo;
+
     //funcion de acciones y politicas
     public float multiplicador = 10.0f;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,9 +45,10 @@ public class RAgent : Agent
         sensor.AddObservation(this.transform.localPosition); //3 observaciones
 
         //la velocidad del agente
-        sensor.AddObservation(rBody.velocity.x);//1 observacion
-        sensor.AddObservation(rBody.velocity.z);//1 observacion
+        sensor.AddObservation(rBody.velocity.x); //1 observacion
+        sensor.AddObservation(rBody.velocity.z); //1 observacion
     }
+
     public override void OnActionReceived(ActionBuffers actions)
     {
         base.OnActionReceived(actions);
