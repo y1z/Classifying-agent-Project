@@ -5,6 +5,7 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody))]
 public sealed class RClassifyingAgent : Agent
@@ -18,8 +19,17 @@ public sealed class RClassifyingAgent : Agent
     public float punishmentAmount = -1.0f;
     public int _nothingCount = 0;
 
+    [SerializeField]
+    private bool _isNearCorrectTarget = false;
 
+    [SerializeField]
     private int[] _fruitvalues = { 0, 0, 0, 0 };
+    [SerializeField]
+    private Vector3[] _positions = { Vector3.zero, Vector3.zero , Vector3.zero , Vector3.zero };
+
+    private Vector3 targetGoal = Vector3.zero;
+
+
     public const int MAX_NOTHING_COUNT = 4200;
 
 
@@ -32,6 +42,7 @@ public sealed class RClassifyingAgent : Agent
         {
             data.Add(VARIABLE.targetData);
             _fruitvalues[i] = (int)VARIABLE.targetData.heldFruit;
+            _positions[i] = VARIABLE.targetData.position;
             i++;
         }
 
@@ -59,6 +70,7 @@ public sealed class RClassifyingAgent : Agent
         moveAgentToCenter();
         dictator.changeTargetsFruit();
         UpdateFruitValues();
+        targetGoal = dictator.desiredTarget().targetData.position;
     }
 
     //funcion para programar los sensores
@@ -68,20 +80,26 @@ public sealed class RClassifyingAgent : Agent
 
         {
             sensor.AddObservation(data[0].position); // 3 observations 
+            sensor.AddObservation(_fruitvalues[0]); //
+                                                   
             sensor.AddObservation(data[1].position); // 3 observations 
+            sensor.AddObservation(_fruitvalues[1]);
+
             sensor.AddObservation(data[2].position); // 3 observations 
+            sensor.AddObservation(_fruitvalues[2]);
+
             sensor.AddObservation(data[3].position); // 3 observations 
-            // 12 in total 
+            sensor.AddObservation(_fruitvalues[3]);
+            // 12 + 5 in total 
         }
 
         {
-            sensor.AddObservation(_fruitvalues[0]);
-            sensor.AddObservation(_fruitvalues[1]);
-            sensor.AddObservation(_fruitvalues[2]);
-            sensor.AddObservation(_fruitvalues[3]);
+
+            sensor.AddObservation(targetGoal); // 3 observations 
             sensor.AddObservation((int)dictator.currentFruitDemand);
-            // 5 in total 
+            // 1 in total 
         }
+        sensor.AddObservation(_isNearCorrectTarget); // 1 observation
 
         sensor.AddObservation(rBody.velocity.x); //1 observations
         sensor.AddObservation(rBody.velocity.z); //1 observations
@@ -112,8 +130,8 @@ public sealed class RClassifyingAgent : Agent
         }
 
         bool is_in_range = distanceFromObjective < minimumDistanceFromTarget;
-        bool is_correct_target = isCorrectTarget(final_target);
-        if ( is_correct_target && is_in_range)
+        _isNearCorrectTarget = isCorrectTarget(final_target);
+        if (_isNearCorrectTarget && is_in_range)
         {
             final_reward = rewardAmount;
             SetReward(rewardAmount);
@@ -123,15 +141,7 @@ public sealed class RClassifyingAgent : Agent
             _nothingCount = 0;
             EndEpisode();
         }
-        else if (is_correct_target && (distanceFromObjective < minimumDistanceFromTarget * 2.0f))
-        {
-            final_reward = rewardAmount * 0.01f;
-            SetReward(rewardAmount * 0.01f);
-            Debug.Log("Did small good");
-            dictator.changeFruit();
-            _nothingCount = 0;
-        }
-        else if (!is_correct_target && is_in_range)
+        else if (!_isNearCorrectTarget && is_in_range)
         {
             final_reward = punishmentAmount * 0.76f;
             SetReward(punishmentAmount * 0.76f);
@@ -140,11 +150,12 @@ public sealed class RClassifyingAgent : Agent
             _nothingCount = 0;
             EndEpisode();
         }
-        else if (this.transform.localPosition.y < 0)
+        else if (this.transform.localPosition.y < -0.5f)
         {
             final_reward = punishmentAmount;
             SetReward(punishmentAmount);
             Debug.Log("Did bad");
+            dictator.changeFruit();
             _nothingCount = 0;
             EndEpisode();
         }

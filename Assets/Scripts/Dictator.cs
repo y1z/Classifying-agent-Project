@@ -61,6 +61,20 @@ public sealed class Dictator : MonoBehaviour
         }
     }
 
+    public Target desiredTarget()
+    {
+        Target result = null;
+        foreach (var target in targets)
+        {
+            if(target.targetData.heldFruit == this.currentFruitDemand)
+            {
+                result = target; break;
+            }
+
+        }
+        return result;
+    }
+
     public bool isSameFruit(Fruit fruit)
     {
         return currentFruitDemand == fruit;

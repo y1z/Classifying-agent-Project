@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 516621750}
   - component: {fileID: 516621751}
   - component: {fileID: 516621752}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: top_left_target
   m_TagString: target
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 601384897}
   - component: {fileID: 601384898}
   - component: {fileID: 601384899}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: top_right_target
   m_TagString: target
   m_Icon: {fileID: 0}
@@ -484,7 +484,7 @@ GameObject:
   - component: {fileID: 750699313}
   - component: {fileID: 750699314}
   - component: {fileID: 750699315}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: botton_left_target
   m_TagString: target
   m_Icon: {fileID: 0}
@@ -746,6 +746,7 @@ GameObject:
   - component: {fileID: 1062136990}
   - component: {fileID: 1062136984}
   - component: {fileID: 1062136988}
+  - component: {fileID: 1062136992}
   m_Layer: 0
   m_Name: agent
   m_TagString: agent
@@ -901,9 +902,16 @@ MonoBehaviour:
   dictator: {fileID: 1584360847}
   multiplicador: 10
   minimumDistanceFromTarget: 1.45
-  rewardAmount: 20
-  punishmentAmount: -6
+  rewardAmount: 11
+  punishmentAmount: -10
   _nothingCount: 0
+  _isNearCorrectTarget: 0
+  _fruitvalues: 00000000000000000000000000000000
+  _positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
 --- !u!114 &1062136990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,8 +925,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 22
-    NumStackedVectorObservations: 1
+    VectorObservationSize: 26
+    NumStackedVectorObservations: 13
     m_ActionSpec:
       m_NumContinuousActions: 2
       BranchSizes: 01000000
@@ -950,6 +958,35 @@ MonoBehaviour:
   DecisionPeriod: 5
   DecisionStep: 0
   TakeActionsBetweenDecisions: 1
+--- !u!114 &1062136992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062136982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - target
+  m_RaysPerDirection: 4
+  m_MaxRayDegrees: 180
+  m_SphereCastRadius: 0.62
+  m_RayLength: 20
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967290
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
 --- !u!1 &1395521721
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,7 +1002,7 @@ GameObject:
   - component: {fileID: 1395521726}
   - component: {fileID: 1395521727}
   - component: {fileID: 1395521728}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: botton_right_target
   m_TagString: target
   m_Icon: {fileID: 0}
@@ -1157,6 +1194,10 @@ PrefabInstance:
       value: Dictator
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1eb9512a22584bb4f93a7cff63a74d50, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1eb9512a22584bb4f93a7cff63a74d50, type: 3}
       propertyPath: m_TagString
       value: dictator
       objectReference: {fileID: 0}
@@ -1170,6 +1211,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1eb9512a22584bb4f93a7cff63a74d50, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1584360850}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1eb9512a22584bb4f93a7cff63a74d50, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1584360853}
   m_SourcePrefab: {fileID: 100100000, guid: 1eb9512a22584bb4f93a7cff63a74d50, type: 3}
 --- !u!4 &1584360843 stripped
 Transform:
@@ -1215,6 +1259,28 @@ MonoBehaviour:
   _color:
     serializedVersion: 2
     rgba: 4291940817
+--- !u!64 &1584360853
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584360844}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3613567641014311022, guid: 1eb9512a22584bb4f93a7cff63a74d50, type: 3}
 --- !u!1 &1880322106
 GameObject:
   m_ObjectHideFlags: 0
