@@ -11,6 +11,7 @@ using UnityEngine;
 public sealed class Dictator : MonoBehaviour
 {
     public Fruit currentFruitDemand = Fruit.Apple;
+    private Fruit prevFruit = Fruit.Apple;
 
     private List<Fruit> possible_fruit_array = new List<Fruit>
         { Fruit.Apple, Fruit.Banana, Fruit.Guava, Fruit.BlueBerry };
@@ -19,23 +20,35 @@ public sealed class Dictator : MonoBehaviour
 
     [SerializeField] private Transform trainingGround;
 
-    void Start()
+    // changer 
+    private ColorChanger _colorChanger;
+
+    private int possible_fruit_array_index = 0;
+
+    private void Awake()
     {
-        foreach (Transform child in trainingGround)
+        _colorChanger = GetComponent<ColorChanger>();
+        _colorChanger._color = FruitType.fruitToColor(currentFruitDemand);
+    }
+
+    private void Update()
+    {
+        if (currentFruitDemand != prevFruit)
         {
-            if (child.gameObject.CompareTag("target"))
-            {
-                targets.Add(child.GetComponent<Target>());
-            }
+            _colorChanger._color = FruitType.fruitToColor(currentFruitDemand);
+            prevFruit = currentFruitDemand;
         }
     }
 
-
-    private void changeFruit()
+    public void changeFruit()
     {
         possible_fruit_array.Shuffle();
-        int last_item_index = possible_fruit_array.Count - 1;
-        currentFruitDemand = possible_fruit_array[last_item_index];
+        int array_len = possible_fruit_array.Count;
+        
+        possible_fruit_array_index += UnityEngine.Random.Range(0, array_len - 1);
+        possible_fruit_array_index = possible_fruit_array_index % array_len;
+        
+        currentFruitDemand = possible_fruit_array[possible_fruit_array_index];
     }
 
     public void changeTargetsFruit()
@@ -57,6 +70,7 @@ public sealed class Dictator : MonoBehaviour
     {
         bool is_correct_fruit = isSameFruit(fruit);
 
+        prevFruit = fruit;
         changeFruit();
 
         return is_correct_fruit;

@@ -1,1 +1,1 @@
-mlagents-learn config/ppo/classifyingAgent.yaml
+mlagents-learn config/ppo/classAgent.yaml --run-id=classAgent_1

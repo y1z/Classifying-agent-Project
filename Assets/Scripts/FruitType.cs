@@ -60,6 +60,33 @@ public sealed class FruitType : MonoBehaviour
         return (int)fruit;
     }
 
+    public static Color fruitToColor(Fruit fruit)
+    {
+        Color result = Color.white;
+        switch (fruit)
+        {
+            case Fruit.Apple:
+                result = Color.red;
+                break;
+            case Fruit.Banana:
+
+                result = Color.yellow;
+                break;
+            case Fruit.Guava:
+                result = Color.green;
+                break;
+            case Fruit.BlueBerry:
+                result = Color.blue;
+                break;
+            case Fruit.NON_FRUIT:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(fruit), fruit, null);
+        }
+
+        return result;
+    }
+
     public Color color
     {
         get => currentColor;

@@ -16,22 +16,49 @@ public sealed class RClassifyingAgent : Agent
     public float minimumDistanceFromTarget = 1.45f;
     public float rewardAmount = 2.0f;
     public float punishmentAmount = -1.0f;
+    public int _nothingCount = 0;
+
+
+    private int[] _fruitvalues = { 0, 0, 0, 0 };
+    public const int MAX_NOTHING_COUNT = 4200;
+
 
     public override void Initialize()
     {
+        rBody = GetComponent<Rigidbody>();
         dictator.currentFruitDemand = Fruit.Apple;
+        int i = 0;
         foreach (var VARIABLE in dictator.targets)
         {
             data.Add(VARIABLE.targetData);
+            _fruitvalues[i] = (int)VARIABLE.targetData.heldFruit;
+            i++;
         }
 
-        rBody = GetComponent<Rigidbody>();
+        dictator.changeTargetsFruit();
+        dictator.receiveFruit(Fruit.Apple);
+    }
+
+    private void UpdateFruitValues()
+    {
+        int i = 0;
+        foreach (var VARIABLE in dictator.targets)
+        {
+            _fruitvalues[i] = (int)VARIABLE.targetData.heldFruit;
+            i++;
+        }
+        
+    }
+
+    public void Start()
+    {
     }
 
     public override void OnEpisodeBegin()
     {
         moveAgentToCenter();
         dictator.changeTargetsFruit();
+        UpdateFruitValues();
     }
 
     //funcion para programar los sensores
@@ -48,10 +75,10 @@ public sealed class RClassifyingAgent : Agent
         }
 
         {
-            sensor.AddObservation((int)data[0].heldFruit);
-            sensor.AddObservation((int)data[1].heldFruit);
-            sensor.AddObservation((int)data[2].heldFruit);
-            sensor.AddObservation((int)data[3].heldFruit);
+            sensor.AddObservation(_fruitvalues[0]);
+            sensor.AddObservation(_fruitvalues[1]);
+            sensor.AddObservation(_fruitvalues[2]);
+            sensor.AddObservation(_fruitvalues[3]);
             sensor.AddObservation((int)dictator.currentFruitDemand);
             // 5 in total 
         }
@@ -69,6 +96,8 @@ public sealed class RClassifyingAgent : Agent
         rBody.AddForce(controlSignal * multiplicador);
 
 
+        float final_reward = -0.01f;
+
         float distanceFromObjective = float.MaxValue;
         Target final_target = null;
 
@@ -82,18 +111,50 @@ public sealed class RClassifyingAgent : Agent
             }
         }
 
-        if (isCorrectTarget(final_target) && distanceFromObjective < minimumDistanceFromTarget)
+        bool is_in_range = distanceFromObjective < minimumDistanceFromTarget;
+        bool is_correct_target = isCorrectTarget(final_target);
+        if ( is_correct_target && is_in_range)
         {
+            final_reward = rewardAmount;
             SetReward(rewardAmount);
+            Debug.Log("Did good");
+            dictator.changeFruit();
+            //dictator.receiveFruit()
+            _nothingCount = 0;
+            EndEpisode();
+        }
+        else if (is_correct_target && (distanceFromObjective < minimumDistanceFromTarget * 2.0f))
+        {
+            final_reward = rewardAmount * 0.01f;
+            SetReward(rewardAmount * 0.01f);
+            Debug.Log("Did small good");
+            dictator.changeFruit();
+            _nothingCount = 0;
+        }
+        else if (!is_correct_target && is_in_range)
+        {
+            final_reward = punishmentAmount * 0.76f;
+            SetReward(punishmentAmount * 0.76f);
+            Debug.Log("Did small bad");
+            dictator.changeFruit();
+            _nothingCount = 0;
             EndEpisode();
         }
         else if (this.transform.localPosition.y < 0)
         {
+            final_reward = punishmentAmount;
             SetReward(punishmentAmount);
+            Debug.Log("Did bad");
+            _nothingCount = 0;
             EndEpisode();
         }
 
-        SetReward(-0.01f);
+        SetReward(final_reward);
+        _nothingCount++;
+        if (_nothingCount >= MAX_NOTHING_COUNT)
+        {
+            SetReward(punishmentAmount * 0.55f);
+        }
     }
 
 
@@ -102,6 +163,7 @@ public sealed class RClassifyingAgent : Agent
         var conti = actionsOut.ContinuousActions;
         conti[0] = Input.GetAxis("Horizontal");
         conti[1] = Input.GetAxis("Vertical");
+
     }
 
     public void moveAgentToCenter()

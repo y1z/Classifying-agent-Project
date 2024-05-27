@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 516621747}
   - component: {fileID: 516621750}
   - component: {fileID: 516621751}
+  - component: {fileID: 516621752}
   m_Layer: 0
   m_Name: top_left_target
   m_TagString: target
@@ -153,7 +154,7 @@ Transform:
   m_GameObject: {fileID: 516621745}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.5, y: 0.5, z: 4.48}
+  m_LocalPosition: {x: -3.53, y: 0.5, z: 3.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -260,6 +261,22 @@ MonoBehaviour:
   targetData:
     position: {x: 0, y: 0, z: 0}
     heldFruit: 0
+  colorChanger: {fileID: 0}
+--- !u!114 &516621752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516621745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7884a4efa7b58b45bf12ea8c32049cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color:
+    serializedVersion: 2
+    rgba: 4294580122
 --- !u!1 &601384892
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,6 +291,7 @@ GameObject:
   - component: {fileID: 601384894}
   - component: {fileID: 601384897}
   - component: {fileID: 601384898}
+  - component: {fileID: 601384899}
   m_Layer: 0
   m_Name: top_right_target
   m_TagString: target
@@ -290,7 +308,7 @@ Transform:
   m_GameObject: {fileID: 601384892}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.48, y: 0.5, z: 4.49}
+  m_LocalPosition: {x: 3.3, y: 0.5, z: 3.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -397,6 +415,22 @@ MonoBehaviour:
   targetData:
     position: {x: 0, y: 0, z: 0}
     heldFruit: 0
+  colorChanger: {fileID: 0}
+--- !u!114 &601384899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601384892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7884a4efa7b58b45bf12ea8c32049cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color:
+    serializedVersion: 2
+    rgba: 4294580122
 --- !u!1 &603604226
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,6 +483,7 @@ GameObject:
   - component: {fileID: 750699310}
   - component: {fileID: 750699313}
   - component: {fileID: 750699314}
+  - component: {fileID: 750699315}
   m_Layer: 0
   m_Name: botton_left_target
   m_TagString: target
@@ -465,7 +500,7 @@ Transform:
   m_GameObject: {fileID: 750699308}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.5, y: 0.5, z: -4.47}
+  m_LocalPosition: {x: -3.53, y: 0.5, z: -3.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -572,6 +607,22 @@ MonoBehaviour:
   targetData:
     position: {x: 0, y: 0, z: 0}
     heldFruit: 0
+  colorChanger: {fileID: 0}
+--- !u!114 &750699315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750699308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7884a4efa7b58b45bf12ea8c32049cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color:
+    serializedVersion: 2
+    rgba: 4294580122
 --- !u!1 &1040857934
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,10 +740,11 @@ GameObject:
   - component: {fileID: 1062136983}
   - component: {fileID: 1062136986}
   - component: {fileID: 1062136985}
-  - component: {fileID: 1062136984}
-  - component: {fileID: 1062136987}
-  - component: {fileID: 1062136990}
   - component: {fileID: 1062136989}
+  - component: {fileID: 1062136987}
+  - component: {fileID: 1062136991}
+  - component: {fileID: 1062136990}
+  - component: {fileID: 1062136984}
   - component: {fileID: 1062136988}
   m_Layer: 0
   m_Name: agent
@@ -846,11 +898,12 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   data: []
-  dictator: {fileID: 0}
+  dictator: {fileID: 1584360847}
   multiplicador: 10
   minimumDistanceFromTarget: 1.45
-  rewardAmount: 2
-  punishmentAmount: -1
+  rewardAmount: 20
+  punishmentAmount: -6
+  _nothingCount: 0
 --- !u!114 &1062136990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -876,12 +929,27 @@ MonoBehaviour:
   m_Model: {fileID: 0}
   m_InferenceDevice: 2
   m_BehaviorType: 0
-  m_BehaviorName: classifyingAgent
+  m_BehaviorName: classAgent
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
   m_DeterministicInference: 0
   m_ObservableAttributeHandling: 0
+--- !u!114 &1062136991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062136982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1395521721
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,6 +964,7 @@ GameObject:
   - component: {fileID: 1395521723}
   - component: {fileID: 1395521726}
   - component: {fileID: 1395521727}
+  - component: {fileID: 1395521728}
   m_Layer: 0
   m_Name: botton_right_target
   m_TagString: target
@@ -912,7 +981,7 @@ Transform:
   m_GameObject: {fileID: 1395521721}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.53, y: 0.5, z: -4.47}
+  m_LocalPosition: {x: 3.35, y: 0.5, z: -3.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1019,6 +1088,22 @@ MonoBehaviour:
   targetData:
     position: {x: 0, y: 0, z: 0}
     heldFruit: 0
+  colorChanger: {fileID: 0}
+--- !u!114 &1395521728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395521721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7884a4efa7b58b45bf12ea8c32049cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color:
+    serializedVersion: 2
+    rgba: 4294580122
 --- !u!1001 &1584360842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1082,6 +1167,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1eb9512a22584bb4f93a7cff63a74d50, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1584360847}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1eb9512a22584bb4f93a7cff63a74d50, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1584360850}
   m_SourcePrefab: {fileID: 100100000, guid: 1eb9512a22584bb4f93a7cff63a74d50, type: 3}
 --- !u!4 &1584360843 stripped
 Transform:
@@ -1105,9 +1193,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d6bf1c94a756e42ae654e38a315bca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentFruitDemand: 0
-  targets: []
-  trainingGround: {fileID: 0}
+  currentFruitDemand: 0
+  targets:
+  - {fileID: 750699314}
+  - {fileID: 516621751}
+  - {fileID: 1395521727}
+  - {fileID: 601384898}
+  trainingGround: {fileID: 603604227}
+--- !u!114 &1584360850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584360844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7884a4efa7b58b45bf12ea8c32049cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color:
+    serializedVersion: 2
+    rgba: 4291940817
 --- !u!1 &1880322106
 GameObject:
   m_ObjectHideFlags: 0
