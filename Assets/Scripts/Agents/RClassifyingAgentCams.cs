@@ -6,8 +6,7 @@ using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 
-[RequireComponent(typeof(Rigidbody))]
-public sealed class RClassifyingAgent : Agent
+public class RClassifyingAgentCams : Agent
 {
     Rigidbody rBody;
     public List<TargetData> data = new List<TargetData>();
@@ -58,10 +57,6 @@ public sealed class RClassifyingAgent : Agent
             i++;
         }
         
-    }
-
-    public void Start()
-    {
     }
 
     public override void OnEpisodeBegin()
@@ -186,5 +181,16 @@ public sealed class RClassifyingAgent : Agent
     public bool isCorrectTarget(Target target)
     {
         return dictator.currentFruitDemand == target.targetData.heldFruit;
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }
