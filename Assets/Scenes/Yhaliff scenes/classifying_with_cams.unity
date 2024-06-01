@@ -123,7 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &9955646
+--- !u!1001 &651651728
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -135,9 +135,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Traninig grounds 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1769958893133657219, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_TargetDisplay
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819240329795202784, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_TargetDisplay
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5088832371195470340, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_TargetDisplay
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7952188678684889533, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.03757286
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7952188678684889533, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -145,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7952188678684889533, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.2921891
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7952188678684889533, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -174,6 +186,14 @@ PrefabInstance:
     - target: {fileID: 7952188678684889533, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461319984831739317, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_TargetDisplay
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474131596456462056, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_TargetDisplay
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -372,4 +392,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1982029637}
   - {fileID: 1095659189}
-  - {fileID: 9955646}
+  - {fileID: 651651728}
