@@ -135,13 +135,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: Traninig grounds 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1626152582134470136, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1769958893133657219, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
       propertyPath: m_TargetDisplay
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 2212904619052159318, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3993475050209906542, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4819240329795202784, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
       propertyPath: m_TargetDisplay
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4957231501502309910, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_BrainParameters.NumStackedVectorObservations
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5088832371195470340, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
       propertyPath: m_TargetDisplay
@@ -185,6 +201,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7952188678684889533, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112516952989049513, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8461319984831739317, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}

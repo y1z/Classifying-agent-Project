@@ -21,6 +21,9 @@ public class RClassifyingAgentCams : Agent
     public float rewardAmount = 2.0f;
     public float punishmentAmount = -1.0f;
     public int nothingCount = 0;
+    
+    [Tooltip("keep track of which direction the agents move")]
+    public Vector3 agentCurrentMovement = Vector3.zero;
 
     [SerializeField] private bool _isNearCorrectTarget = false;
     [SerializeField] private int[] _fruitvalues = { 0, 0, 0, 0 };
@@ -28,8 +31,7 @@ public class RClassifyingAgentCams : Agent
 
     private Vector3 targetGoal = Vector3.zero;
 
-
-    public const int MAX_NOTHING_COUNT = 4200;
+    private const int MAX_NOTHING_COUNT = 4200;
 
     public override void Initialize()
     {
@@ -70,7 +72,6 @@ public class RClassifyingAgentCams : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(transform.localPosition); //3 observations 
-
         {
             sensor.AddObservation(data[0].position); // 3 observations 
             sensor.AddObservation(_fruitvalues[0]); //
@@ -88,8 +89,8 @@ public class RClassifyingAgentCams : Agent
 
         {
             sensor.AddObservation(targetGoal); // 3 observations 
-            sensor.AddObservation((int)dictator.currentFruitDemand);
-            // 1 in total 
+            sensor.AddObservation((int)dictator.currentFruitDemand); // 1 observations
+            // 4 in total 
         }
         sensor.AddObservation(_isNearCorrectTarget); // 1 observation
 
@@ -103,6 +104,8 @@ public class RClassifyingAgentCams : Agent
         Vector3 controlSignal = Vector3.zero;
         controlSignal.x = actions.ContinuousActions[0];
         controlSignal.z = actions.ContinuousActions[1];
+        agentCurrentMovement.x = controlSignal.x;
+        agentCurrentMovement.z = controlSignal.z;
         rBody.AddForce(controlSignal * movementSpeed);
 
 
@@ -142,7 +145,7 @@ public class RClassifyingAgentCams : Agent
             nothingCount = 0;
             EndEpisode();
         }
-        else if (this.transform.localPosition.y < -0.5f)
+        else if (this.transform.localPosition.y < -0.2f)
         {
             final_reward = punishmentAmount;
             SetReward(punishmentAmount);
