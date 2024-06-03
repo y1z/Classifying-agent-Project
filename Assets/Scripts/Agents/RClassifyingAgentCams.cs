@@ -24,6 +24,9 @@ public class RClassifyingAgentCams : Agent
     
     [Tooltip("keep track of which direction the agents move")]
     public Vector3 agentCurrentMovement = Vector3.zero;
+    
+    [Tooltip("keep track of the velocity of the agent")]
+    public Vector3 agentVelocity = Vector3.zero;
 
     [SerializeField] private bool _isNearCorrectTarget = false;
     [SerializeField] private int[] _fruitvalues = { 0, 0, 0, 0 };
@@ -88,7 +91,7 @@ public class RClassifyingAgentCams : Agent
         }
 
         {
-            sensor.AddObservation(targetGoal); // 3 observations 
+            //sensor.AddObservation(targetGoal); // 3 observations 
             sensor.AddObservation((int)dictator.currentFruitDemand); // 1 observations
             // 4 in total 
         }
@@ -106,6 +109,7 @@ public class RClassifyingAgentCams : Agent
         controlSignal.z = actions.ContinuousActions[1];
         agentCurrentMovement.x = controlSignal.x;
         agentCurrentMovement.z = controlSignal.z;
+        agentVelocity = rBody.velocity;
         rBody.AddForce(controlSignal * movementSpeed);
 
 

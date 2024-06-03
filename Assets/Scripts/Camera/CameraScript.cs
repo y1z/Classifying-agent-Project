@@ -25,8 +25,10 @@ public sealed class CameraScript : MonoBehaviour
     {
         Vector3 agent_position = agentTransform.position;
         transform.position = agent_position;
-        offset.x = agent.agentCurrentMovement.x;
-        offset.y = agent.agentCurrentMovement.y;
-        agentCamera.transform.LookAt(agent_position +(offset * 2.0f) );
+        agentCamera.transform.position = agent_position;
+        offset.x = agent.agentVelocity.x;
+        offset.y = 0.0f;
+        offset.z = agent.agentVelocity.z;
+        agentCamera.transform.LookAt(agent_position +(offset * 2.5f));
     }
 }

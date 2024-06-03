@@ -147,6 +147,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3255648016016449012, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_Name
+      value: Agent Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407468085798734014, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_DrawHalo
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407468085798734014, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3993475050209906542, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -157,11 +169,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4957231501502309910, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
       propertyPath: m_BrainParameters.NumStackedVectorObservations
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5088832371195470340, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
       propertyPath: m_TargetDisplay
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477285384487679171, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5940001111798024718, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5940001111798024718, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5940001111798024718, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5940001111798024718, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5940001111798024718, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5940001111798024718, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 62
       objectReference: {fileID: 0}
     - target: {fileID: 7952188678684889533, guid: 68f27243dc053d2458c0610aa0cb5b3a, type: 3}
       propertyPath: m_LocalPosition.x
