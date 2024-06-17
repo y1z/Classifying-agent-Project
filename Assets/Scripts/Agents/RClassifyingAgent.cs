@@ -17,6 +17,7 @@ public sealed class RClassifyingAgent : Agent
     public float rewardAmount = 2.0f;
     public float punishmentAmount = -1.0f;
     public int _nothingCount = 0;
+    public Int64 episodeCount = 0;
 
     [SerializeField]
     private bool _isNearCorrectTarget = false;
@@ -59,9 +60,21 @@ public sealed class RClassifyingAgent : Agent
         }
         
     }
+    
+    public void OnApplicationQuit()
+    {
+        Debug.Log("Application ending after " + episodeCount + " Episodes");
+    }
+
 
     public void Start()
     {
+    }
+
+    public void endAgentEpisode()
+    {
+        episodeCount += 1;
+        EndEpisode();
     }
 
     public override void OnEpisodeBegin()
@@ -138,7 +151,7 @@ public sealed class RClassifyingAgent : Agent
             dictator.changeFruit();
             //dictator.receiveFruit()
             _nothingCount = 0;
-            EndEpisode();
+            endAgentEpisode();
         }
         else if (!_isNearCorrectTarget && is_in_range)
         {
@@ -147,7 +160,7 @@ public sealed class RClassifyingAgent : Agent
             Debug.Log("Did small bad");
             dictator.changeFruit();
             _nothingCount = 0;
-            EndEpisode();
+            endAgentEpisode();
         }
         else if (this.transform.localPosition.y < -0.5f)
         {
@@ -156,7 +169,7 @@ public sealed class RClassifyingAgent : Agent
             Debug.Log("Did bad");
             dictator.changeFruit();
             _nothingCount = 0;
-            EndEpisode();
+            endAgentEpisode();
         }
 
         SetReward(final_reward);

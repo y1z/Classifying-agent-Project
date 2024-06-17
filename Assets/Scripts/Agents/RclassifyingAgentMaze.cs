@@ -5,40 +5,46 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
-using UnityEngine.Serialization;
+
 
 [RequireComponent(typeof(Rigidbody))]
-public class RClassifyingAgentCams : Agent
+[RequireComponent (typeof(SphereCollider))]
+public class RclassifyingAgentMaze : Agent
 {
     Rigidbody rBody;
     public List<TargetData> data = new List<TargetData>();
     public Dictator dictator;
-
-    [FormerlySerializedAs("multiplicador")]
-    public float movementSpeed = 10.0f;
-
+    public float speed = 10.0f;
     public float minimumDistanceFromTarget = 1.45f;
     public float rewardAmount = 2.0f;
     public float punishmentAmount = -1.0f;
-    public int nothingCount = 0;
-    
-    [Tooltip("keep track of which direction the agents move")]
-    public Vector3 agentCurrentMovement = Vector3.zero;
-    
-    [Tooltip("keep track of the velocity of the agent")]
-    public Vector3 agentVelocity = Vector3.zero;
+    public int _nothingCount = 0;
 
-    [SerializeField] private bool _isNearCorrectTarget = false;
-    [SerializeField] private int[] _fruitvalues = { 0, 0, 0, 0 };
-    [SerializeField] private Vector3[] _positions = { Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero };
+    [SerializeField]
+    private bool _isNearCorrectTarget = false;
+
+    [SerializeField]
+    private int[] _fruitvalues = { 0, 0, 0, 0 };
+    [SerializeField]
+    private Vector3[] _positions = { Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero };
 
     private Vector3 targetGoal = Vector3.zero;
 
-    private const int MAX_NOTHING_COUNT = 4200;
+    public const int MAX_NOTHING_COUNT =  4200 + (4200 / 10);
+
+    public static LayerMask wallMask;
+    SphereCollider collider;
+
+    private Collider[] overlapResults = new Collider[10];
+
+
 
     public override void Initialize()
     {
         rBody = GetComponent<Rigidbody>();
+        collider = GetComponent<SphereCollider>();
+        wallMask = (1 << LayerMask.NameToLayer("wall"));
+
         dictator.currentFruitDemand = Fruit.Apple;
         int i = 0;
         foreach (var VARIABLE in dictator.targets)
@@ -61,6 +67,7 @@ public class RClassifyingAgentCams : Agent
             _fruitvalues[i] = (int)VARIABLE.targetData.heldFruit;
             i++;
         }
+
     }
 
     public override void OnEpisodeBegin()
@@ -70,11 +77,12 @@ public class RClassifyingAgentCams : Agent
         UpdateFruitValues();
         targetGoal = dictator.desiredTarget().targetData.position;
     }
-    
+
     //funcion para programar los sensores
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(transform.localPosition); //3 observations 
+        sensor.AddObservation(this.transform.localPosition); //3 observations 
+
         {
             sensor.AddObservation(data[0].position); // 3 observations 
             sensor.AddObservation(_fruitvalues[0]); //
@@ -91,9 +99,10 @@ public class RClassifyingAgentCams : Agent
         }
 
         {
-            //sensor.AddObservation(targetGoal); // 3 observations 
-            sensor.AddObservation((int)dictator.currentFruitDemand); // 1 observations
-            // 4 in total 
+
+            sensor.AddObservation(targetGoal); // 3 observations 
+            sensor.AddObservation((int)dictator.currentFruitDemand);
+            // 1 in total 
         }
         sensor.AddObservation(_isNearCorrectTarget); // 1 observation
 
@@ -107,11 +116,9 @@ public class RClassifyingAgentCams : Agent
         Vector3 controlSignal = Vector3.zero;
         controlSignal.x = actions.ContinuousActions[0];
         controlSignal.z = actions.ContinuousActions[1];
-        agentCurrentMovement.x = controlSignal.x;
-        agentCurrentMovement.z = controlSignal.z;
-        agentVelocity = rBody.velocity;
-        rBody.AddForce(controlSignal * movementSpeed);
+        rBody.AddForce(controlSignal * speed);
 
+        
 
         float final_reward = -0.01f;
 
@@ -137,7 +144,7 @@ public class RClassifyingAgentCams : Agent
             Debug.Log("Did good");
             dictator.changeFruit();
             //dictator.receiveFruit()
-            nothingCount = 0;
+            _nothingCount = 0;
             EndEpisode();
         }
         else if (!_isNearCorrectTarget && is_in_range)
@@ -146,22 +153,28 @@ public class RClassifyingAgentCams : Agent
             SetReward(punishmentAmount * 0.76f);
             Debug.Log("Did small bad");
             dictator.changeFruit();
-            nothingCount = 0;
+            _nothingCount = 0;
             EndEpisode();
         }
-        else if (this.transform.localPosition.y < -0.2f)
+        else if (this.transform.localPosition.y < -0.5f)
         {
             final_reward = punishmentAmount;
             SetReward(punishmentAmount);
             Debug.Log("Did bad");
             dictator.changeFruit();
-            nothingCount = 0;
+            _nothingCount = 0;
+            EndEpisode();
+        }
+        else if( 0 < Physics.OverlapSphereNonAlloc(transform.position, collider.radius + 0.05f, overlapResults, wallMask))
+        {
+            final_reward = punishmentAmount * 0.55f;
+            SetReward(final_reward);
             EndEpisode();
         }
 
         SetReward(final_reward);
-        nothingCount++;
-        if (nothingCount >= MAX_NOTHING_COUNT)
+        _nothingCount++;
+        if (_nothingCount >= MAX_NOTHING_COUNT)
         {
             SetReward(punishmentAmount * 0.55f);
         }
@@ -173,6 +186,7 @@ public class RClassifyingAgentCams : Agent
         var conti = actionsOut.ContinuousActions;
         conti[0] = Input.GetAxis("Horizontal");
         conti[1] = Input.GetAxis("Vertical");
+
     }
 
     public void moveAgentToCenter()

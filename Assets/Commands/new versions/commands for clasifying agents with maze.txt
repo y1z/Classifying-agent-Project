@@ -1,0 +1,1 @@
+mlagents-learn config/ppo/classAgentWithMaze.yaml --run-id=classAgent_with_maze

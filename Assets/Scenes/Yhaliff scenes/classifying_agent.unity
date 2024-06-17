@@ -321,6 +321,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Traninig grounds 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4957231501502309910, guid: 40a5d940842295b4fb2ab0912c841e1b, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7952188678684889533, guid: 40a5d940842295b4fb2ab0912c841e1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
